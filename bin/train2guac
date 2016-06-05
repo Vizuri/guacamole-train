@@ -22,18 +22,22 @@ then
 	exit 1
 fi
 
-echo '\\c guacamole'
+# the database is actually called guacamole_db, the following does not appear to be
+# necessary if we follow the guac installation and config instructions
+#echo '\\c guacamole'
 
-echo 'BEGIN;'
-echo "CREATE ROLE guac WITH LOGIN PASSWORD '$GUACPASS';"
-echo 'GRANT CONNECT ON DATABASE guacamole TO guac;'
-echo 'GRANT SELECT,USAGE ON ALL SEQUENCES IN SCHEMA public TO guac;'
-echo 'GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA public TO guac;'
-echo 'END;'
+#echo 'BEGIN;'
+#echo "CREATE ROLE guac WITH LOGIN PASSWORD '$GUACPASS';"
+#echo 'GRANT CONNECT ON DATABASE guacamole TO guac;'
+#echo 'GRANT SELECT,USAGE ON ALL SEQUENCES IN SCHEMA public TO guac;'
+#echo 'GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA public TO guac;'
+#echo 'END;'
 
 echo
 
-echo '\\c guacamole'
+#echo '\\c guacamole'
+
+echo '\\c guacamole_db'
 echo "-- Add extention or else the digest function doesn't work."
 echo "CREATE EXTENSION pgcrypto;"
 
@@ -66,9 +70,10 @@ do
                 echo "INSERT INTO guacamole_connection_parameter VALUES(currval('guacamole_connection_connection_id_seq'),'username','ubuntu');" 
                 echo "INSERT INTO guacamole_connection_parameter VALUES(currval('guacamole_connection_connection_id_seq'),'password','$PASS');"
 
-                echo
-                echo 'INSERT INTO guacamole_connection_permission (user_id, connection_id, permission)'
-                echo '  VALUES (currval('guacamole_user_user_id_seq'), currval('guacamole_connection_connection_id_seq'), 'READ');'
+# the following causes an error, we appear to be able to live without it
+#                echo
+#                echo 'INSERT INTO guacamole_connection_permission (user_id, connection_id, permission)'
+#                echo '  VALUES (currval('guacamole_user_user_id_seq'), currval('guacamole_connection_connection_id_seq'), 'READ');'
 
                 echo
                 echo
