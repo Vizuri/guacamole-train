@@ -73,7 +73,7 @@ do
 # the following causes an error, we appear to be able to live without it
 #                echo
 #                echo 'INSERT INTO guacamole_connection_permission (user_id, connection_id, permission)'
-#                echo '  VALUES (currval('guacamole_user_user_id_seq'), currval('guacamole_connection_connection_id_seq'), 'READ');'
+#                echo "  VALUES (currval('guacamole_user_user_id_seq'), currval('guacamole_connection_connection_id_seq'), 'READ');"
 
                 echo
                 echo
