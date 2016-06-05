@@ -4,10 +4,19 @@
 
 # this should be run in the train directory containing the 'users' directory
 
-PASS=PASSWORDHERE
-GUACPASS=GUACHASHHERE
+# Usage:
+# train2guac USERPASSWORD GUACPASS
 
-if test ! -d
+PASS="$1"
+GUACPASS="$2"
+
+if test $# -ne 2
+then
+    echo "Usage: $0 USERPASS GUACPASS"
+    exit 1
+fi
+
+if test ! -d users
 then
 	echo "error: users directory not found"
 	exit 1
